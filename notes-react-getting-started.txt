@@ -1,0 +1,135 @@
+  ==============================
+   React Project - Boilerplate
+  ==============================
+
+Getting Started:
+
+  $ npm --version
+  6.13.4
+
+  $ node --version
+  v12.14.1
+
+  $ mkdir react-maps-test
+  $ cd react-maps-test/
+
+  $ npm init
+  <Creates package.json>
+  <Then make any minor changes in a text editor>
+
+Create Directories/Files:
+
+  $ mkdir src public
+  $ touch src/index.js
+  $ touch public/index.html
+  <Add index.html, index.js (see below)>
+
+Install WebPack:
+
+  $ npm install --save-dev webpack webpack-cli
+  $ npm install --save-dev webpack-dev-server
+  <Add webpack.config.js (see below)
+
+  $ npm install --save-dev style-loader css-loader file-loader
+
+Install React:
+
+  $ npm install --save react react-dom
+
+Install Babel:
+
+  $ npm install --save-dev @babel/core
+  $ npm install --save-dev @babel/preset-env
+  $ npm install --save-dev @babel/preset-react
+  $ npm install --save-dev babel-loader
+
+
+------------
+ .babelrc
+------------
+{
+    "presets": ["@babel/env", "@babel/react"]
+}
+
+-------------------
+ webpack.config.js
+-------------------
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.js$/i,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.css$/i,
+                use: {
+                    loader: ['style-loader', 'css-loader']
+                }
+            },
+            {
+                test: /\.(png|jpe?g|svg)$/i,
+                use: {
+                    loader: ['style-loader', 'css-loader']
+                }
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebPackPlugin({
+            template: "./public/index.html",
+            filename: "./index.html"
+        })
+    ]
+}
+
+-------------------
+ public/index.html
+-------------------
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Test:React</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!--
+        <link rel="stylesheet" href="index.css">
+        <script src="script.js"></script>
+        -->
+    </head>
+    <body>
+        <noscript>Please enable JavaScript to run this application!</noscript>
+        <div id="app-react-root"></div>
+    </body>
+</html>
+
+---------------
+ src/index.js
+---------------
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+
+console.info('React App Starting --------->>');
+
+const Hello = () => {
+    return <div>Hello React!</div>;
+};
+
+ReactDOM.render(
+    <Hello />,
+    document.getElementById("app-react-root")
+);
+
+
+------------
+ .gitignore
+------------
+dist
+node_modules
