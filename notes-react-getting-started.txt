@@ -44,6 +44,18 @@ Install Babel:
   $ npm install --save-dev babel-loader
 
 
+Install eslint:
+
+  $ npm install --save-dev eslint eslint-plugin-react eslint-plugin-react-hooks
+  $ npm install --save-dev eslint-plugin-import
+  $ npm install --save-dev babel-eslint eslint-loader
+
+  $ npx install-peerdeps --dev eslint-config-airbnb
+  (This seems to downgrade the above dependencies, so re-run the above to update.)
+
+  # (?? not tried:)
+  $ npm update eslint eslint-plugin-react-hooks
+
 ------------
  .babelrc
 ------------
@@ -133,3 +145,37 @@ ReactDOM.render(
 ------------
 dist
 node_modules
+
+
+------------
+ .eslintrc
+------------
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb",
+        "plugin:import/errors",
+        "plugin:import/warnings"
+    ],
+    "env": {
+        "browser": true,
+        "node": true,
+        "jest": true,
+        "commonjs": true
+    },
+    "plugins": [
+        "react-hooks"
+    ],
+    "rules": {
+        "comma-dangle": "off",
+        "indent": ["error", 4],
+        "no-console": "off",
+
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4]
+    }
+}

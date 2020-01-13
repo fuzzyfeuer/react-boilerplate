@@ -6,7 +6,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/i,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                loader: ['babel-loader', 'eslint-loader']
             },
             {
                 test: /\.css$/i,
@@ -23,8 +23,11 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: "./public/index.html",
-            filename: "./index.html"
+            template: './public/index.html',
+            filename: './index.html'
         })
-    ]
+    ],
+    devServer: {
+        port: 9000
+    }
 }
