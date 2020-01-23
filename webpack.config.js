@@ -1,6 +1,10 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    devServer: {
+        hot: true,
+        port: 9001
+    },
     module: {
         rules: [
             {
@@ -26,8 +30,5 @@ module.exports = {
             template: './public/index.html',
             filename: './index.html'
         })
-    ],
-    devServer: {
-        port: 9000
-    }
+    ]
 }

@@ -56,11 +56,32 @@ Install eslint:
   # (?? not tried:)
   $ npm update eslint eslint-plugin-react-hooks
 
+
+Allow Imports Relative to Base Directory './src':
+
+  $ npm install --save-dev babel-plugin-module-resolver
+
+  So that eslint doesn't error:
+
+  $ npm install --save-dev eslint-import-resolver-babel-module
+
+  Update ".babelrc": Add the plugin "module-resolver" (see below).
+  Update ".eslintrc": Add "import/resolver" section to settings.
+
+
 ------------
  .babelrc
 ------------
 {
     "presets": ["@babel/env", "@babel/react"]
+    "plugins": [
+        ["module-resolver", {
+            "root": ["./src"],
+            "alias": {
+                "test": "./test_no_such_directory"
+            }
+        }]
+    ]
 }
 
 -------------------
@@ -177,5 +198,10 @@ node_modules
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4]
-    }
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-module": {}
+        }
+    }    
 }
